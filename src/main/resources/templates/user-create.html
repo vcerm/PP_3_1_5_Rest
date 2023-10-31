@@ -5,17 +5,16 @@
     <title>New User</title>
 </head>
 <body>
-<form action="#" th:action="@{/user-create}" th:object="${user}" method="post">
+<form action="#" th:action="@{/admin/create}" th:object="${user}" method="post">
     <label for="username">Username</label>
     <input type="text" th:field="*{username}" id="username" placeholder="Username">
     <label for="password">Password</label>
     <input type="text" th:field="*{password}" id="password" placeholder="password">
     <br/>
-    <select multiple name="listRoles[]" required="required">
-        <!--        <option disabled> </option>-->
-        <option value="ROLE_ADMIN">ADMIN</option>
-        <option value="ROLE_USER">USER</option>
-    </select>
+    <th:block th:each="role: ${roles}">
+        <input type="checkbox" th:field="*{roles}"
+               th:text="${role.name}" th:value="${role.id}" class="m-2" />
+    </th:block>
     <br/>
     <input type="submit" value="Create User">
 </form>

@@ -5,7 +5,7 @@
     <title>Update</title>
 </head>
 <body>
-<form action="#" th:action="@{/user-update}" th:object="${user}" method="post">
+<form action="#" th:method="PATCH" th:action="@{/admin/user-update}" th:object="${user}">
     <label for="id">ID</label>
     <input readonly type="number" th:field="*{id}" id="id" placeholder="ID">
     <br/>
@@ -15,12 +15,10 @@
     <label for="password">Password</label>
     <input type="text" th:field="*{password}" id="password" placeholder="Password">
     <br/>
-    <br/>
-    <select multiple name="listRoles[]" required="required">
-        <!--        <option disabled> </option>-->
-        <option value="ROLE_ADMIN">ADMIN</option>
-        <option value="ROLE_USER">USER</option>
-    </select>
+    <th:block th:each="role: ${roles}">
+        <input type="checkbox" th:field="*{roles}"
+               th:text="${role.name}" th:value="${role.id}" class="m-2" />
+    </th:block>
     <br/>
     <input type="submit" value="Update User">
 </form>

@@ -29,12 +29,16 @@
                 </th:block>
                 </td>
                 <td><a th:href="@{admin/user-update/{id}(id=${user.id})}">Edit</a></td>
-                <td><a th:href="@{admin/user-delete/{id}(id=${user.id})}">Delete</a></td>
+                <td>
+                <form th:method="DELETE" th:action="@{admin/user-delete/{id}(id=${user.id})}">
+                    <input type="submit" class="buttonDelete" value="Delete"/>
+                </form>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
-    <p><a href="admin/user-create">Create user</a></p>
+    <p><a href="admin/create">Create user</a></p>
 </div>
 <a href="/logout">
     <button>Exit</button>
