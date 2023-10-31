@@ -26,7 +26,7 @@ public class User implements UserDetails {
     @JoinTable(name = "users_role"
             , joinColumns = @JoinColumn(name = "user_id")
             , inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    private Collection<Role> roles;
 
     public User() {
     }
@@ -47,7 +47,7 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
+    public Collection<Role> getRoles() {
         return roles;
     }
 
