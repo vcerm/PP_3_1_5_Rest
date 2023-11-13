@@ -1,23 +1,21 @@
 package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.entity.User;
 import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserDetailsService, UserService, InitializingBean {
+public class UserServiceImpl implements UserDetailsService, UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder encoder;
@@ -68,7 +66,9 @@ public class UserServiceImpl implements UserDetailsService, UserService, Initial
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
-
+    public void update(User user) {
+        user.setPassword(encoder.encode(user.getPassword()));
+        userRepository.save(user);
     }
+
 }

@@ -8,6 +8,8 @@ import ru.kata.spring.boot_security.demo.entity.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/admin")
 @PreAuthorize("hasAuthority('ADMIN')")
@@ -21,42 +23,40 @@ public class AdminController {
     }
 
     @GetMapping
-    public String userList(Model model) {
+    public String userList(Model model, Principal principal) {
         model.addAttribute("users", userService.allUsers());
+        model.addAttribute("allRoles", roleService.findAll());
+        model.addAttribute("username", principal.getName());
+        model.addAttribute("role", userService.findByUsername(principal.getName()).getRoles());
         return "/admin";
     }
 
-    @GetMapping("create")
+    @GetMapping("/new")
     public String newUser(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("roles", roleService.findAll());
-        return "user-create";
+        return "redirect:/admin";
     }
 
-    @PostMapping("create")
+
+    @PostMapping("/new")
     public String create(@ModelAttribute("user") User user) {
         userService.saveUser(user);
         return "redirect:/admin";
     }
 
-    @DeleteMapping("user-delete/{id}")
+    @PatchMapping("/user/{id}")
+    public String updateUser(User user) {
+        userService.update(user);
+        return "redirect:/admin";
+    }
+
+    @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteById(id);
         return "redirect:/admin";
     }
 
-    @GetMapping("/user-update/{id}")
-    public String updateUserForm(@PathVariable("id") Long id, Model model) {
-        User user = userService.findUserById(id);
-        model.addAttribute("user", user);
-        model.addAttribute("roles", roleService.findAll());
-        return "user-update";
-    }
 
-    @PatchMapping("/user-update")
-    public String updateUser(User user) {
-        userService.saveUser(user);
-        return "redirect:/admin";
-    }
 
 }
