@@ -9,7 +9,7 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 </head>
-<!--Шапка с логином и ролями-->
+
 <header>
     <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
         <div class="container-fluid text-white">
@@ -33,9 +33,7 @@
 <div class="container-fluid">
     <div class="row">
 
-        <!--- на странице будет 2 колонки шириной 3 и 9 (макс.ширина 12)--->
         <div class="col-1">
-            <!--- Устанавливаем навигацию с вертикальными "подушками"--->
             <div aria-orientation="vertical" class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
 
                 <a aria-controls="v-pills-admin" aria-selected="true"
@@ -55,17 +53,14 @@
                          role="tabpanel">
 
                         <nav>
-                            <!--вкладка Users Table-->
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
 
                                 <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
                                    role="tab" aria-controls="nav-home" aria-selected="true">Users table</a>
-                                <!-- Кнопка New User -->
                                 <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
                                    role="tab" aria-controls="nav-profile" aria-selected="false">New User</a>
                             </div>
                         </nav>
-                        <!--User's List-->
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                                  aria-labelledby="nav-home-tab">
@@ -93,7 +88,6 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                <!--add new user-->
                                 <div class="card">
                                     <div class="card-header">
                                         <h3>Add new user</h3>
@@ -135,7 +129,6 @@
     </div>
 </div>
 
-<!-- Modal edit -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="dialog">
         <form id="editModalForm">
@@ -180,7 +173,6 @@
     </div>
 </div>
 
-<!-- Modal Delete -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
