@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.rest_controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +12,6 @@ import java.util.List;
 @RequestMapping("/api/admin/users")
 public class RestAdminController {
     private final UserService userService;
-
-    @Autowired
     public RestAdminController(UserService userService) {
         this.userService = userService;
     }
@@ -43,8 +40,9 @@ public class RestAdminController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id){
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id){
         userService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
